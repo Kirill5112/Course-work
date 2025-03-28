@@ -1,0 +1,17 @@
+<div class="card border-2" style="width: 23rem">
+  <div class="card-body overflow-auto">
+    <h5 class="card-title fs-6 text-nowrap  fw-bold mb-1">{{ project.name }}&emsp;
+      <button (click)="editProject(project.id || 0)" class="fa-solid fa-pen bg-transparent border-0"></button>&emsp;
+      <button (click)="toTasksList(project.id || 0)" class="fa-solid fa-table-list bg-transparent border-0"></button>
+    </h5>
+    <p class="card-text fs-6 text-primary-emphasis mb-1">{{ project.startDate | date: 'dd/MM/yyyy' }}</p>
+    <div *ngIf="project.endDate != null else noEndDate">
+      <p class="card-text fs-6 text-danger-emphasis mb-1">{{ project.endDate | date: 'dd/MM/yyyy' }}</p>
+    </div>
+    <p class="card-text fs-6 text-body-emphasis mb-1">Незавершённых задач: {{ countIncompleteTasks }}</p>
+  </div>
+</div>
+
+<ng-template #noEndDate>
+  <p class="card-text fs-6 text-danger-emphasis mb-1">Не завершён</p>
+</ng-template>

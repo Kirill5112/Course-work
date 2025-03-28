@@ -1,0 +1,18 @@
+<div class="d-flex gap-4">
+  <h3 class="d-flex">Project list</h3>
+  <form [formGroup]="form" class="d-flex gap-2 align-items-center" role="search">
+    <input class="form-control" type="text" placeholder="Find a project" aria-label="Search"
+           formControlName="inputField" (input)="updateSearch()">
+    <button class=" btn btn-outline-success" (click)="updateSearch()"><i class="fas fa-search"></i></button>
+  </form>
+  <button (click)="newProject()" type="button" class="btn btn-dark">
+    <em class="fa-solid fa-plus">&nbsp;Новый проект</em>
+  </button>
+</div>
+
+<hr>
+
+<div class="d-flex justify-content-start gap-2 flex-wrap">
+  <app-project-card [project]="project.project" [countIncompleteTasks]="project.unfinishedTasksCount"
+                    *ngFor="let project of projectsWithTaskCounts"></app-project-card>
+</div>

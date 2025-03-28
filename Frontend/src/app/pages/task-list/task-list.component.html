@@ -1,0 +1,10 @@
+<div class="d-flex gap-4">
+  <h3 class="d-flex">Task list</h3>
+<!--  routerlink-->
+  <button (click)="toProjectsList()" class="fa-solid fa-house bg-transparent border-0"></button>
+</div>
+<hr>
+<div class="d-flex justify-content-start gap-2 flex-wrap">
+  <app-task-card [task]="task" (delete)="handleDelete($event)" *ngFor="let task of tasks"></app-task-card>
+</div>
+
