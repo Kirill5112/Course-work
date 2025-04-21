@@ -6,8 +6,11 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { CommentService } from './services/comment.service';
 import { ProjectService } from './services/project.service';
+import { TeamService } from './services/team.service';
 import { TaskService } from './services/task.service';
+import { AuthService } from './services/auth.service';
 
 /**
  * Module that provides all services and configuration.
@@ -17,8 +20,11 @@ import { TaskService } from './services/task.service';
   exports: [],
   declarations: [],
   providers: [
+    CommentService,
     ProjectService,
+    TeamService,
     TaskService,
+    AuthService,
     ApiConfiguration
   ],
 })

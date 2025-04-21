@@ -1,0 +1,67 @@
+<div class="container-fluid card register-container ">
+  <h3 class="text-center">Регистрация</h3>
+  <hr>
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('email')?.hasError('required')">
+        email; обязателен для заполнения
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('email')?.hasError('email')">
+        введите адрес электронной почты
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('email')?.hasError('maxlength')">
+        Максимальная длина 255 символов
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="login" class="form-label">Логин</label>
+      <input type="text" class="form-control" id="login" placeholder="логин" formControlName="userName">
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('userName')?.hasError('required')">
+        логин обязателен для заполнения
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('userName')?.hasError('minlength')">
+        Минимальная длина 8 символа
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('userName')?.hasError('maxlength')">
+        Максимальная длина 20 символов
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Пароль</label>
+      <input type="password" class="form-control" id="password" placeholder="пароль" formControlName="password">
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('password')?.hasError('required')">
+        пароль обязателен для заполнения
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('password')?.hasError('minlength')">
+        Минимальная длина 12 символа
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('password')?.hasError('maxlength')">
+        Максимальная длина 72 символов
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="repeatPassword" class="form-label">Повторите пароль</label>
+      <input type="password" class="form-control" id="repeatPassword" placeholder="пароль"
+             formControlName="repeatPassword">
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('repeatPassword')?.hasError('required')">
+        повторите пароль
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.errors?.['PassDontEqual']">
+        пароли не совпадают
+      </div>
+    </div>
+  </form>
+  <div class="d-flex justify-content-between mb-3">
+    <button (click)="onClick()" type="button" class="btn btn-primary">
+      <em class="fas fa-sign-in-alt">&nbsp;Зарегистрироваться</em>
+    </button>
+    <div class="text-secondary">
+      Уже есть аккаунт?&nbsp;
+      <button (click)="login()" type="button" class="btn btn-link">
+        Войти
+      </button>
+    </div>
+  </div>
+</div>

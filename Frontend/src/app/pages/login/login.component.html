@@ -1,0 +1,25 @@
+<div class="container-fluid card login-container ">
+  <h3 class="text-center">Войти</h3>
+  <hr>
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="login" class="form-label">Логин</label>
+      <input type="text" class="form-control" id="login" placeholder="логин" formControlName="userName">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Пароль</label>
+      <input type="password" class="form-control" id="password" placeholder="пароль" formControlName="password">
+    </div>
+  </form>
+  <div class="d-flex justify-content-between mb-3">
+    <button (click)="onClick()" type="button" class="btn btn-primary">
+      <em class="fas fa-sign-in-alt">&nbsp;Войти</em>
+    </button>
+    <div class="text-secondary">
+      Нет аккаунта?&nbsp;
+      <button (click)="register()" type="button" class="btn btn-link">
+        Создать
+      </button>
+    </div>
+  </div>
+</div>

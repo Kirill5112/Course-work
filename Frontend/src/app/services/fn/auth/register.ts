@@ -8,26 +8,26 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ProjectDto } from '../../models/project-dto';
+import { UserDto } from '../../models/user-dto';
 
-export interface GetProject$Params {
-  projectId: number;
+export interface Register$Params {
+      body: UserDto
 }
 
-export function getProject(http: HttpClient, rootUrl: string, params: GetProject$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectDto>> {
-  const rb = new RequestBuilder(rootUrl, getProject.PATH, 'get');
+export function register(http: HttpClient, rootUrl: string, params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, register.PATH, 'post');
   if (params) {
-    rb.path('projectId', params.projectId, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
+    rb.build({ responseType: 'text', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ProjectDto>;
+      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
     })
   );
 }
 
-getProject.PATH = '/api/projects/{projectId}';
+register.PATH = '/api/register';

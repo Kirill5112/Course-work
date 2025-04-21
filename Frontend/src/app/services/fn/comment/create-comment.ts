@@ -8,16 +8,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ProjectDto } from '../../models/project-dto';
+import { CommentDto } from '../../models/comment-dto';
 
-export interface GetProject$Params {
-  projectId: number;
+export interface CreateComment$Params {
+  taskId: number;
+      body: CommentDto
 }
 
-export function getProject(http: HttpClient, rootUrl: string, params: GetProject$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectDto>> {
-  const rb = new RequestBuilder(rootUrl, getProject.PATH, 'get');
+export function createComment(http: HttpClient, rootUrl: string, params: CreateComment$Params, context?: HttpContext): Observable<StrictHttpResponse<CommentDto>> {
+  const rb = new RequestBuilder(rootUrl, createComment.PATH, 'post');
   if (params) {
-    rb.path('projectId', params.projectId, {});
+    rb.path('taskId', params.taskId, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -25,9 +27,9 @@ export function getProject(http: HttpClient, rootUrl: string, params: GetProject
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ProjectDto>;
+      return r as StrictHttpResponse<CommentDto>;
     })
   );
 }
 
-getProject.PATH = '/api/projects/{projectId}';
+createComment.PATH = '/api/tasks/{taskId}/comments';

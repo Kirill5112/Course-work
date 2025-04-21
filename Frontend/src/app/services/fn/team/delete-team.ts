@@ -8,26 +8,27 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ProjectDto } from '../../models/project-dto';
 
-export interface GetProject$Params {
+export interface DeleteTeam$Params {
   projectId: number;
+  id: number;
 }
 
-export function getProject(http: HttpClient, rootUrl: string, params: GetProject$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectDto>> {
-  const rb = new RequestBuilder(rootUrl, getProject.PATH, 'get');
+export function deleteTeam(http: HttpClient, rootUrl: string, params: DeleteTeam$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, deleteTeam.PATH, 'delete');
   if (params) {
     rb.path('projectId', params.projectId, {});
+    rb.path('id', params.id, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
+    rb.build({ responseType: 'text', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ProjectDto>;
+      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
     })
   );
 }
 
-getProject.PATH = '/api/projects/{projectId}';
+deleteTeam.PATH = '/api/projects/{projectId}/teams/{id}';

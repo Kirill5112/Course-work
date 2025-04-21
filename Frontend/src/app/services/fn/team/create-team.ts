@@ -8,16 +8,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ProjectDto } from '../../models/project-dto';
+import { TeamDto } from '../../models/team-dto';
 
-export interface GetProject$Params {
+export interface CreateTeam$Params {
   projectId: number;
+      body: TeamDto
 }
 
-export function getProject(http: HttpClient, rootUrl: string, params: GetProject$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectDto>> {
-  const rb = new RequestBuilder(rootUrl, getProject.PATH, 'get');
+export function createTeam(http: HttpClient, rootUrl: string, params: CreateTeam$Params, context?: HttpContext): Observable<StrictHttpResponse<TeamDto>> {
+  const rb = new RequestBuilder(rootUrl, createTeam.PATH, 'post');
   if (params) {
     rb.path('projectId', params.projectId, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -25,9 +27,9 @@ export function getProject(http: HttpClient, rootUrl: string, params: GetProject
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ProjectDto>;
+      return r as StrictHttpResponse<TeamDto>;
     })
   );
 }
 
-getProject.PATH = '/api/projects/{projectId}';
+createTeam.PATH = '/api/projects/{projectId}/teams';

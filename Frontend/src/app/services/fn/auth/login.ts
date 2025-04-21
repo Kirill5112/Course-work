@@ -8,16 +8,17 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ProjectDto } from '../../models/project-dto';
+import { UserDto } from '../../models/user-dto';
 
-export interface GetProject$Params {
-  projectId: number;
+export interface Login$Params {
+      body: UserDto
 }
 
-export function getProject(http: HttpClient, rootUrl: string, params: GetProject$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectDto>> {
-  const rb = new RequestBuilder(rootUrl, getProject.PATH, 'get');
+export function login(http: HttpClient, rootUrl: string, params: Login$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+  const rb = new RequestBuilder(rootUrl, login.PATH, 'post');
   if (params) {
-    rb.path('projectId', params.projectId, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -25,9 +26,10 @@ export function getProject(http: HttpClient, rootUrl: string, params: GetProject
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ProjectDto>;
+      return r as StrictHttpResponse<{
+      }>;
     })
   );
 }
 
-getProject.PATH = '/api/projects/{projectId}';
+login.PATH = '/api/login';

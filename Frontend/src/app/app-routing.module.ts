@@ -3,11 +3,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {ProjectListComponent} from "./pages/project-list/project-list.component";
 import {EditProjectComponent} from "./pages/edit-project/edit-project.component";
 import {TaskListComponent} from "./pages/task-list/task-list.component";
+import {RegisterComponent} from "./pages/register/register.component";
+import {LoginComponent} from "./pages/login/login.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/projects',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
   {
     path: 'tasks/:projectId',
     component: TaskListComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

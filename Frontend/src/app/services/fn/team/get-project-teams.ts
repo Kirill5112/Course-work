@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ProjectDto } from '../../models/project-dto';
+import { TeamDto } from '../../models/team-dto';
 
-export interface GetProject$Params {
+export interface GetProjectTeams$Params {
   projectId: number;
 }
 
-export function getProject(http: HttpClient, rootUrl: string, params: GetProject$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectDto>> {
-  const rb = new RequestBuilder(rootUrl, getProject.PATH, 'get');
+export function getProjectTeams(http: HttpClient, rootUrl: string, params: GetProjectTeams$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<TeamDto>>> {
+  const rb = new RequestBuilder(rootUrl, getProjectTeams.PATH, 'get');
   if (params) {
     rb.path('projectId', params.projectId, {});
   }
@@ -25,9 +25,9 @@ export function getProject(http: HttpClient, rootUrl: string, params: GetProject
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ProjectDto>;
+      return r as StrictHttpResponse<Array<TeamDto>>;
     })
   );
 }
 
-getProject.PATH = '/api/projects/{projectId}';
+getProjectTeams.PATH = '/api/projects/{projectId}/teams';
