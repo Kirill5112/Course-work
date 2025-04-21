@@ -1,0 +1,40 @@
+<div class="container-fluid card edit-container">
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="name" class="form-label">Название задачи</label>
+      <input type="text" class="form-control" id="name" placeholder="Название" formControlName="name">
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('name')?.hasError('required')">
+        Имя обязательно для заполнения
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('name')?.hasError('minlength')">
+        Минимальная длина 3 символа
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('name')?.hasError('maxlength')">
+        Максимальная длина 50 символов
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="desc" class="form-label">Описание задачи</label>
+      <textarea class="form-control desc" id="desc" placeholder="описание" formControlName="description"></textarea>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('description')?.hasError('required')">
+        Описание обязательно для заполнения
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="dateE" class="form-label">Дата окончания</label>
+      <input type="date" class="form-control" id="dateE" formControlName="endDate">
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('description')?.hasError('required')">
+        Поле дата окончания обязательно для заполнения
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('endDate')?.hasError('invalidDate')">
+        Введите корректную дату
+      </div>
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('endDate')?.hasError('futureDate')">
+        Дата должна быть в будущем
+      </div>
+    </div>
+    <div class="mb-3 align-self-center">
+      <button (click)="onClick()" class="btn btn-dark center" id="btn">{{ btnText }}</button>
+    </div>
+  </form>
+</div>

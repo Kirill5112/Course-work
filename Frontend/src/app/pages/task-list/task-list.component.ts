@@ -41,4 +41,9 @@ export class TaskListComponent implements OnInit {
       taskId: id
     }).subscribe();
   }
+
+  newProject() {
+    this.router.navigate(['/tasks', String(this.id), 'new']);
+  }
+
 }

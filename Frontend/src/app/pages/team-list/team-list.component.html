@@ -1,0 +1,30 @@
+<div class=" gap-4 p-2">
+  <div *ngIf="hasError">
+    <div class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="p-2" *ngIf="!hasError && isEmpty">
+    <p>Нет ни одной команды</p>
+  </div>
+
+  <div *ngIf="!hasError && !isEmpty">
+    <ul class="list-group">
+      <li class="p-2">
+        <button (click)="newTeam()" class="btn btn-outline-dark">Новая команда</button>
+      </li>
+      <li class="list-group-item"
+          *ngFor="let team of teams"
+          (mouseover)="hoveredTeam = team"
+          (mouseleave)="hoveredTeam = null">
+        <div><em (click)="editTeam(team.id || 0)" class="fa-solid fa-pen curs">&nbsp;</em> <em
+          class="fa-solid fa-table-list curs"> </em>&emsp;{{ team.name }}
+        </div>
+        <div *ngIf="hoveredTeam === team" class="text-secondary">
+          {{ team.description }}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

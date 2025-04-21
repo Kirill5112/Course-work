@@ -1,4 +1,4 @@
-<div class="card border-2" style="width: 23rem">
+<div (click)="toTeamList(project.id || 0)" class="card border-2" style="width: 23rem">
   <div class="card-body overflow-auto">
     <h5 class="card-title fs-6 text-nowrap  fw-bold mb-1">{{ project.name }}&emsp;
       <button (click)="editProject(project.id || 0)" class="fa-solid fa-pen bg-transparent border-0"></button>&emsp;

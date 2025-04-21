@@ -5,6 +5,9 @@ import {EditProjectComponent} from "./pages/edit-project/edit-project.component"
 import {TaskListComponent} from "./pages/task-list/task-list.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {LoginComponent} from "./pages/login/login.component";
+import {EditTaskComponent} from "./pages/edit-task/edit-task/edit-task.component";
+import {TeamListComponent} from "./pages/team-list/team-list.component";
+import {EditTeamComponent} from "./pages/edit-team/edit-team.component";
 
 const routes: Routes = [
   {
@@ -27,6 +30,26 @@ const routes: Routes = [
   {
     path: 'tasks/:projectId',
     component: TaskListComponent
+  },
+  {
+    path: 'tasks/:projectId/new',
+    component: EditTaskComponent
+  },
+  {
+    path: 'tasks/:projectId/:id',
+    component: EditTaskComponent
+  },
+  {
+    path: 'teams/:projectId',
+    component: TeamListComponent
+  },
+  {
+    path: 'teams/:projectId/new',
+    component: EditTeamComponent
+  },
+  {
+    path: 'teams/:projectId/:id',
+    component: EditTeamComponent
   },
   {
     path: 'register',

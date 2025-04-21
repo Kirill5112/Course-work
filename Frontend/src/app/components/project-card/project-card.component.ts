@@ -39,4 +39,9 @@ export class ProjectCardComponent {
   toTasksList(id: number) {
     this.router.navigate(['tasks', id])
   }
+  toTeamList(id:number) {
+    this.router.navigate(['teams', id])
+  }
+
+  protected readonly alert = alert;
 }
