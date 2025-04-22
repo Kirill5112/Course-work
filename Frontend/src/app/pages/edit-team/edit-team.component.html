@@ -20,14 +20,10 @@
         Описание обязательно для заполнения
       </div>
     </div>
-    <div class="d-flex">
-      <div class="mb-3 align-self-center">
-        <button (click)="onClick()" class="btn btn-dark center" id="btn">{{ btnText }}</button>
-      </div>
+    <div class="d-flex mb-2">
+      <button (click)="onClick()" class="btn btn-dark center" id="btn">{{ btnText }}</button>
       <div class="ms-auto">
-        <button (click)="onDelete()" type="button" class="btn btn-danger">
-          Удалить
-        </button>
+        <button (click)="onDelete()" type="button" class="btn btn-danger">Удалить</button>
       </div>
     </div>
   </form>

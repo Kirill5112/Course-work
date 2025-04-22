@@ -37,8 +37,13 @@
         Введите корректную дату
       </div>
     </div>
-    <div class="mb-3 align-self-center">
+    <div class="d-flex mb-2">
       <button (click)="onClick()" class="btn btn-dark center" id="btn">{{ btnText }}</button>
+      <div class="ms-auto">
+        <button (click)="onDelete()" type="button" class="btn btn-danger">
+          Удалить
+        </button>
+      </div>
     </div>
   </form>
 </div>

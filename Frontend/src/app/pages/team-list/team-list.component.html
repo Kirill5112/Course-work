@@ -12,14 +12,17 @@
   <div *ngIf="!hasError && !isEmpty">
     <ul class="list-group">
       <li class="p-2">
-        <button (click)="newTeam()" class="btn btn-outline-dark">Новая команда</button>
+        <div class="d-flex">
+          <button (click)="toProjectsList()" class="fa-solid fa-house bg-transparent border-0">&nbsp;</button>
+          <button (click)="newTeam()" class="btn btn-outline-dark">Новая команда</button>
+        </div>
       </li>
       <li class="list-group-item"
           *ngFor="let team of teams"
           (mouseover)="hoveredTeam = team"
           (mouseleave)="hoveredTeam = null">
-        <div><em (click)="editTeam(team.id || 0)" class="fa-solid fa-pen curs">&nbsp;</em> <em
-          class="fa-solid fa-table-list curs"> </em>&emsp;{{ team.name }}
+        <div><em (click)="editTeam(team.id || 0)" class="fa-solid fa-pen curs">&nbsp;</em>
+          <em (click)="toUsers(team.id || 0)" class="fa-solid fa-table-list curs"> </em>&emsp;{{ team.name }}
         </div>
         <div *ngIf="hoveredTeam === team" class="text-secondary">
           {{ team.description }}

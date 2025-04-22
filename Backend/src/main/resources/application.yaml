@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/CourseAch
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: postgres #${DB_USERNAME}
+    password: 5151122 #${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
@@ -13,3 +13,5 @@ logging:
   level:
     org.hibernate.sql: DEBUG
     org.hibernate.type: TRACE
+secret:
+  key: 6++K7214ozh8g2Xxw71+4ULUVJ/Cbu/91RVqCkALErf/zzX22LE2aLAnhFuhFh+VpgpH4kvKxXr0ploPHZ79gw==

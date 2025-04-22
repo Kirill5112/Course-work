@@ -34,7 +34,7 @@ export class TeamListComponent implements OnInit {
         this.isEmpty = teams.length === 0;
       },
       error: (error) => {
-        this.errorMessage = 'Произошла ошибка';
+        this.errorMessage = 'Произошла ошибка' + error;
         this.hasError = true;
         this.isEmpty = false;
       }
@@ -44,8 +44,17 @@ export class TeamListComponent implements OnInit {
   newTeam() {
     this.router.navigate(['teams', String(this.projectId), 'new']);
   }
-  editTeam(id: number){
-    this.router.navigate(['teams',String(this.projectId),String(id)]);
+
+  editTeam(id: number) {
+    this.router.navigate(['teams', String(this.projectId), String(id)]);
+  }
+
+  toProjectsList() {
+    this.router.navigate(['projects']);
+  }
+
+  toUsers(id: number) {
+    this.router.navigate(['teams', String(this.projectId), String(id), 'users'])
   }
 
 }

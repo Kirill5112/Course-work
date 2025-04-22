@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -12,7 +13,8 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-    private static final String secretKey = System.getenv("SECRET_KEY");
+    @Value("${secret.key}")
+    private String secretKey; //System.getenv("SECRET_KEY");
 
     public String generateToken(String username) {
         Key key = getKeyFromSecret();
@@ -47,7 +49,7 @@ public class JwtService {
 
     private Key getKeyFromSecret() {
         return Keys.hmacShaKeyFor(
-                Decoders.BASE64.decode(secretKey) // Если секрет не в Base64, используйте Decoders.decode(secretKey)
+                Decoders.BASE64.decode(secretKey)
         );
     }
 }

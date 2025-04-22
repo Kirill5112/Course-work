@@ -17,6 +17,9 @@ import { EditTaskComponent } from './pages/edit-task/edit-task/edit-task.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TeamListComponent } from './pages/team-list/team-list.component';
 import { EditTeamComponent } from './pages/edit-team/edit-team.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { TeamUsersListComponent } from './pages/team-users-list/team-users-list.component';
+import { StrangerProfileComponent } from './pages/stranger-profile/stranger-profile.component';
 
 export const HTTP_TOKEN_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -36,7 +39,10 @@ export const HTTP_TOKEN_INTERCEPTOR_PROVIDER: Provider = {
     LoginComponent,
     EditTaskComponent,
     TeamListComponent,
-    EditTeamComponent
+    EditTeamComponent,
+    UserProfileComponent,
+    TeamUsersListComponent,
+    StrangerProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,9 @@ import {LoginComponent} from "./pages/login/login.component";
 import {EditTaskComponent} from "./pages/edit-task/edit-task/edit-task.component";
 import {TeamListComponent} from "./pages/team-list/team-list.component";
 import {EditTeamComponent} from "./pages/edit-team/edit-team.component";
+import {UserProfileComponent} from "./pages/user-profile/user-profile.component";
+import {TeamUsersListComponent} from "./pages/team-users-list/team-users-list.component";
+import {StrangerProfileComponent} from "./pages/stranger-profile/stranger-profile.component";
 
 const routes: Routes = [
   {
@@ -58,6 +61,18 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent
+  },
+  {
+    path: 'stranger/:id',
+    component: StrangerProfileComponent
+  },
+  {
+    path: 'teams/:projectId/:id/users',
+    component: TeamUsersListComponent
   }
 ];
 

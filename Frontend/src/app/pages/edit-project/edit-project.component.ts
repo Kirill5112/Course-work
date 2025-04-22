@@ -86,4 +86,21 @@ export class EditProjectComponent implements OnInit {
         this.createProject(projectData);
     }
   }
+
+  onDelete() {
+    if (this.id !== 0)
+      this.projectService.deleteProject({
+        projectId: this.id
+      }).subscribe({
+        next: () => {
+          this.router.navigate(['projects/']);
+        },
+        error: err => {
+          alert('Ошибка:' + err);
+        }
+      })
+    else
+      this.router.navigate(['projects/']);
+  }
+
 }

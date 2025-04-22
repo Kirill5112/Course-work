@@ -83,4 +83,8 @@ export class ProjectListComponent implements OnInit {
       });
   }
 
+  protected goToProfile(){
+    this.router.navigate(['profile']);
+  }
+
 }
