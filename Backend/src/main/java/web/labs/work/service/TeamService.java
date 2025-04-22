@@ -4,11 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import web.labs.work.dto.TeamDto;
+import web.labs.work.dto.UserDto;
 import web.labs.work.exeption.ResourceNotFoundException;
 import web.labs.work.model.Project;
 import web.labs.work.model.Team;
+import web.labs.work.model.User;
 import web.labs.work.repository.ProjectRepository;
 import web.labs.work.repository.TeamRepository;
+import web.labs.work.repository.UserRepository;
 
 import java.util.List;
 
@@ -17,6 +20,7 @@ import java.util.List;
 public class TeamService {
     private final TeamRepository repo;
     private final ProjectRepository projectRepository;
+    private final UserRepository userRepository;
     private final ModelMapper mapper;
 
     public TeamDto createTeam(Long projectId, TeamDto teamDto) {
@@ -30,7 +34,7 @@ public class TeamService {
         return mapper.map(team, TeamDto.class);
     }
 
-    public TeamDto updateTeam(Long projectId,  Integer id, TeamDto dto) {
+    public TeamDto updateTeam(Long projectId, Integer id, TeamDto dto) {
         Team model = repo.findByIdAndProjectId(id, projectId).
                 orElseThrow(() -> new ResourceNotFoundException("Team not found"));
         model.setName(dto.getName());
@@ -39,9 +43,9 @@ public class TeamService {
         return mapper.map(model, TeamDto.class);
     }
 
-    public void deleteTeam(Long projectId, Integer teamId) {
-        repo.delete(repo.findByIdAndProjectId(
-                teamId, projectId).orElseThrow(() -> new ResourceNotFoundException("Team not found")));
+    public void deleteTeam(Integer teamId) {
+        repo.delete(repo.findById(
+                teamId).orElseThrow(() -> new ResourceNotFoundException("Team not found")));
     }
 
     public List<TeamDto> getTeamsByProjectId(Long projectId) {
@@ -53,5 +57,36 @@ public class TeamService {
         Team team = repo.findByIdAndProjectId(teamId, projectId).
                 orElseThrow(() -> new ResourceNotFoundException("Team not found"));
         return mapper.map(team, TeamDto.class);
+    }
+
+    public List<UserDto> getTeamUsers(Integer teamId) {
+        Team team = repo.findTeamWithUsers(teamId).orElseThrow(() ->
+                new ResourceNotFoundException("Team not found"));
+        return team.getUsers().stream().map(user -> {
+            user.setPassword(null);
+            return mapper.map(user, UserDto.class);
+        }).toList();
+    }
+
+    public TeamDto addUserToTeam(Integer teamId, Long userId) {
+        Team team = repo.findTeamWithUsers(teamId)
+                .orElseThrow(() -> new ResourceNotFoundException("Team not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        if (!team.getUsers().contains(user))
+            team.getUsers().add(user);
+        else
+            throw new IllegalArgumentException("Пользователь уже добавлен");
+        Team savedTeam = repo.save(team);
+        return mapper.map(savedTeam, TeamDto.class);
+    }
+
+    public void deleteUserFromTeam(Integer teamId, Long userId) {
+        Team team = repo.findTeamWithUsers(teamId)
+                .orElseThrow(() -> new ResourceNotFoundException("Team not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        team.getUsers().remove(user);
+        repo.save(team);
     }
 }

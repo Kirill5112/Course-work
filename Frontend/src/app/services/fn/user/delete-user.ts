@@ -9,14 +9,14 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface DeleteTeam$Params {
-  id: number;
+export interface DeleteUser$Params {
+  userId: number;
 }
 
-export function deleteTeam(http: HttpClient, rootUrl: string, params: DeleteTeam$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, deleteTeam.PATH, 'delete');
+export function deleteUser(http: HttpClient, rootUrl: string, params: DeleteUser$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, deleteUser.PATH, 'delete');
   if (params) {
-    rb.path('id', params.id, {});
+    rb.path('userId', params.userId, {});
   }
 
   return http.request(
@@ -29,4 +29,4 @@ export function deleteTeam(http: HttpClient, rootUrl: string, params: DeleteTeam
   );
 }
 
-deleteTeam.PATH = '/api/teams/{id}';
+deleteUser.PATH = '/api/users/{userId}';

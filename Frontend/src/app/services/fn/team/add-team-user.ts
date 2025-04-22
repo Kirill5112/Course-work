@@ -10,14 +10,16 @@ import { RequestBuilder } from '../../request-builder';
 
 import { TeamDto } from '../../models/team-dto';
 
-export interface GetProjectTeams$Params {
-  projectId: number;
+export interface AddTeamUser$Params {
+  teamId: number;
+  userId: number;
 }
 
-export function getProjectTeams(http: HttpClient, rootUrl: string, params: GetProjectTeams$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<TeamDto>>> {
-  const rb = new RequestBuilder(rootUrl, getProjectTeams.PATH, 'get');
+export function addTeamUser(http: HttpClient, rootUrl: string, params: AddTeamUser$Params, context?: HttpContext): Observable<StrictHttpResponse<TeamDto>> {
+  const rb = new RequestBuilder(rootUrl, addTeamUser.PATH, 'post');
   if (params) {
-    rb.path('projectId', params.projectId, {});
+    rb.path('teamId', params.teamId, {});
+    rb.path('userId', params.userId, {});
   }
 
   return http.request(
@@ -25,9 +27,9 @@ export function getProjectTeams(http: HttpClient, rootUrl: string, params: GetPr
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<TeamDto>>;
+      return r as StrictHttpResponse<TeamDto>;
     })
   );
 }
 
-getProjectTeams.PATH = '/api/teams/{projectId}';
+addTeamUser.PATH = '/api/teams/{teamId}/users/{userId}';

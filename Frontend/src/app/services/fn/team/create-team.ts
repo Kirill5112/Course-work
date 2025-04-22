@@ -32,4 +32,4 @@ export function createTeam(http: HttpClient, rootUrl: string, params: CreateTeam
   );
 }
 
-createTeam.PATH = '/api/projects/{projectId}/teams';
+createTeam.PATH = '/api/teams/{projectId}';

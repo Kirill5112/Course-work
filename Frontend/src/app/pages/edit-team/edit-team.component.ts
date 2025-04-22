@@ -80,7 +80,6 @@ export class EditTeamComponent implements OnInit {
   onDelete() {
     if (this.id !== 0)
       this.teamService.deleteTeam({
-        projectId: this.projectId,
         id: this.id
       }).subscribe({
         next: () => {

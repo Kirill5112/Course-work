@@ -10,14 +10,14 @@ import { RequestBuilder } from '../../request-builder';
 
 import { TeamDto } from '../../models/team-dto';
 
-export interface GetProjectTeams$Params {
-  projectId: number;
+export interface GetUserTeams$Params {
+  userId: number;
 }
 
-export function getProjectTeams(http: HttpClient, rootUrl: string, params: GetProjectTeams$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<TeamDto>>> {
-  const rb = new RequestBuilder(rootUrl, getProjectTeams.PATH, 'get');
+export function getUserTeams(http: HttpClient, rootUrl: string, params: GetUserTeams$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<TeamDto>>> {
+  const rb = new RequestBuilder(rootUrl, getUserTeams.PATH, 'get');
   if (params) {
-    rb.path('projectId', params.projectId, {});
+    rb.path('userId', params.userId, {});
   }
 
   return http.request(
@@ -30,4 +30,4 @@ export function getProjectTeams(http: HttpClient, rootUrl: string, params: GetPr
   );
 }
 
-getProjectTeams.PATH = '/api/teams/{projectId}';
+getUserTeams.PATH = '/api/users/{userId}/teams';

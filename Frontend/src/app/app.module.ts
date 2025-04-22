@@ -14,9 +14,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import {HttpTokenInterceptor} from "./interceptor/http-token.interceptor";
 import { EditTaskComponent } from './pages/edit-task/edit-task/edit-task.component';
-import { ConfirmDialogComponent } from './something/confirm-dialog/confirm-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDialogModule} from "@angular/material/dialog";
 import { TeamListComponent } from './pages/team-list/team-list.component';
 import { EditTeamComponent } from './pages/edit-team/edit-team.component';
 
@@ -37,7 +35,6 @@ export const HTTP_TOKEN_INTERCEPTOR_PROVIDER: Provider = {
     RegisterComponent,
     LoginComponent,
     EditTaskComponent,
-    ConfirmDialogComponent,
     TeamListComponent,
     EditTeamComponent
   ],
@@ -47,8 +44,7 @@ export const HTTP_TOKEN_INTERCEPTOR_PROVIDER: Provider = {
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule,
-    MatDialogModule
+    BrowserAnimationsModule
   ],
   providers: [
     HttpClient,

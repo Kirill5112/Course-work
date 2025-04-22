@@ -14,41 +14,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import web.labs.work.dto.TeamDto;
+import web.labs.work.dto.UserDto;
 import web.labs.work.service.TeamService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/projects/{projectId}/teams", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/teams", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 @Tag(name = "Team")
 public class TeamController {
-    private final TeamService service;
     private final TeamService teamService;
 
-    @GetMapping
+    @GetMapping("/{projectId}")
     public List<TeamDto> getProjectTeams(@PathVariable Long projectId) {
         return teamService.getTeamsByProjectId(projectId);
     }
 
-    @GetMapping("/{teamId}")
+    @GetMapping("/{projectId}/{teamId}")
     public TeamDto getTeam(@PathVariable Long projectId, @PathVariable Integer teamId) {
-        return service.getTeamByBothId(projectId, teamId);
+        return teamService.getTeamByBothId(projectId, teamId);
     }
 
-    @PostMapping
+    @GetMapping("/{teamId}/users")
+    public List<UserDto> getTeamUsers(@PathVariable Integer teamId) {
+        return teamService.getTeamUsers(teamId);
+    }
+
+    @PostMapping("/{projectId}")
     public TeamDto createTeam(@PathVariable Long projectId, @RequestBody TeamDto dto) {
-        return service.createTeam(projectId, dto);
+        return teamService.createTeam(projectId, dto);
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{teamId}/users/{userId}")
+    public TeamDto addTeamUser(@PathVariable Integer teamId, @PathVariable Long userId) {
+        return teamService.addUserToTeam(teamId, userId);
+    }
+
+    @PutMapping("/{projectId}/{id}")
     public TeamDto updateTeam(@PathVariable Long projectId, @PathVariable Integer id, @RequestBody TeamDto dto) {
-        return service.updateTeam(projectId, id, dto);
+        return teamService.updateTeam(projectId, id, dto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTeam(@PathVariable Long projectId, @PathVariable Integer id) {
-        service.deleteTeam(projectId, id);
+    public void deleteTeam(@PathVariable Integer id) {
+        teamService.deleteTeam(id);
+    }
+
+    @DeleteMapping("/{teamId}/users/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTeamUser(@PathVariable Integer teamId, @PathVariable Long userId) {
+        teamService.deleteUserFromTeam(teamId, userId);
     }
 }

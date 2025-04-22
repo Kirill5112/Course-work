@@ -8,16 +8,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { TeamDto } from '../../models/team-dto';
+import { UserDto } from '../../models/user-dto';
 
-export interface GetProjectTeams$Params {
-  projectId: number;
+export interface UpdateUser$Params {
+  userId: number;
+      body: UserDto
 }
 
-export function getProjectTeams(http: HttpClient, rootUrl: string, params: GetProjectTeams$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<TeamDto>>> {
-  const rb = new RequestBuilder(rootUrl, getProjectTeams.PATH, 'get');
+export function updateUser(http: HttpClient, rootUrl: string, params: UpdateUser$Params, context?: HttpContext): Observable<StrictHttpResponse<UserDto>> {
+  const rb = new RequestBuilder(rootUrl, updateUser.PATH, 'put');
   if (params) {
-    rb.path('projectId', params.projectId, {});
+    rb.path('userId', params.userId, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -25,9 +27,9 @@ export function getProjectTeams(http: HttpClient, rootUrl: string, params: GetPr
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<TeamDto>>;
+      return r as StrictHttpResponse<UserDto>;
     })
   );
 }
 
-getProjectTeams.PATH = '/api/teams/{projectId}';
+updateUser.PATH = '/api/users/{userId}';

@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TaskDto} from "../../services/models/task-dto";
 import {Router} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDialogComponent} from "../../something/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-task-card',
@@ -10,8 +8,9 @@ import {ConfirmDialogComponent} from "../../something/confirm-dialog/confirm-dia
   styleUrls: ['./task-card.component.scss']
 })
 export class TaskCardComponent {
-  constructor(private router: Router, private dialog: MatDialog) {
+  constructor(private router: Router) {
   }
+
   get task(): TaskDto {
     return this._task;
   }
@@ -20,20 +19,13 @@ export class TaskCardComponent {
   set task(value: TaskDto) {
     this._task = value;
   }
+
   private _task: TaskDto = {};
 
   @Output() delete = new EventEmitter<number>();
-  onDelete() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '300px',
-      data: { message: 'Действительно удалить элемент?' }
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.delete.emit(this._task.id);
-      }
-    });
+  onDelete() {
+    this.delete.emit(this._task.id);
   }
 
   editTask(projectId: number, id: number) {

@@ -32,4 +32,4 @@ export function getTeam(http: HttpClient, rootUrl: string, params: GetTeam$Param
   );
 }
 
-getTeam.PATH = '/api/projects/{projectId}/teams/{teamId}';
+getTeam.PATH = '/api/teams/{projectId}/{teamId}';

@@ -11,17 +11,24 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { addTeamUser } from '../fn/team/add-team-user';
+import { AddTeamUser$Params } from '../fn/team/add-team-user';
 import { createTeam } from '../fn/team/create-team';
 import { CreateTeam$Params } from '../fn/team/create-team';
 import { deleteTeam } from '../fn/team/delete-team';
 import { DeleteTeam$Params } from '../fn/team/delete-team';
+import { deleteTeamUser } from '../fn/team/delete-team-user';
+import { DeleteTeamUser$Params } from '../fn/team/delete-team-user';
 import { getProjectTeams } from '../fn/team/get-project-teams';
 import { GetProjectTeams$Params } from '../fn/team/get-project-teams';
 import { getTeam } from '../fn/team/get-team';
 import { GetTeam$Params } from '../fn/team/get-team';
+import { getTeamUsers } from '../fn/team/get-team-users';
+import { GetTeamUsers$Params } from '../fn/team/get-team-users';
 import { TeamDto } from '../models/team-dto';
 import { updateTeam } from '../fn/team/update-team';
 import { UpdateTeam$Params } from '../fn/team/update-team';
+import { UserDto } from '../models/user-dto';
 
 @Injectable({ providedIn: 'root' })
 export class TeamService extends BaseService {
@@ -30,7 +37,7 @@ export class TeamService extends BaseService {
   }
 
   /** Path part for operation `updateTeam()` */
-  static readonly UpdateTeamPath = '/api/projects/{projectId}/teams/{id}';
+  static readonly UpdateTeamPath = '/api/teams/{projectId}/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -54,33 +61,58 @@ export class TeamService extends BaseService {
     );
   }
 
-  /** Path part for operation `deleteTeam()` */
-  static readonly DeleteTeamPath = '/api/projects/{projectId}/teams/{id}';
+  /** Path part for operation `addTeamUser()` */
+  static readonly AddTeamUserPath = '/api/teams/{teamId}/users/{userId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteTeam()` instead.
+   * To access only the response body, use `addTeamUser()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteTeam$Response(params: DeleteTeam$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return deleteTeam(this.http, this.rootUrl, params, context);
+  addTeamUser$Response(params: AddTeamUser$Params, context?: HttpContext): Observable<StrictHttpResponse<TeamDto>> {
+    return addTeamUser(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteTeam$Response()` instead.
+   * To access the full response (for headers, for example), `addTeamUser$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteTeam(params: DeleteTeam$Params, context?: HttpContext): Observable<void> {
-    return this.deleteTeam$Response(params, context).pipe(
+  addTeamUser(params: AddTeamUser$Params, context?: HttpContext): Observable<TeamDto> {
+    return this.addTeamUser$Response(params, context).pipe(
+      map((r: StrictHttpResponse<TeamDto>): TeamDto => r.body)
+    );
+  }
+
+  /** Path part for operation `deleteTeamUser()` */
+  static readonly DeleteTeamUserPath = '/api/teams/{teamId}/users/{userId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `deleteTeamUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  deleteTeamUser$Response(params: DeleteTeamUser$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return deleteTeamUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `deleteTeamUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  deleteTeamUser(params: DeleteTeamUser$Params, context?: HttpContext): Observable<void> {
+    return this.deleteTeamUser$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
   /** Path part for operation `getProjectTeams()` */
-  static readonly GetProjectTeamsPath = '/api/projects/{projectId}/teams';
+  static readonly GetProjectTeamsPath = '/api/teams/{projectId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -105,7 +137,7 @@ export class TeamService extends BaseService {
   }
 
   /** Path part for operation `createTeam()` */
-  static readonly CreateTeamPath = '/api/projects/{projectId}/teams';
+  static readonly CreateTeamPath = '/api/teams/{projectId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -129,8 +161,33 @@ export class TeamService extends BaseService {
     );
   }
 
+  /** Path part for operation `getTeamUsers()` */
+  static readonly GetTeamUsersPath = '/api/teams/{teamId}/users';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getTeamUsers()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTeamUsers$Response(params: GetTeamUsers$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<UserDto>>> {
+    return getTeamUsers(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getTeamUsers$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTeamUsers(params: GetTeamUsers$Params, context?: HttpContext): Observable<Array<UserDto>> {
+    return this.getTeamUsers$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<UserDto>>): Array<UserDto> => r.body)
+    );
+  }
+
   /** Path part for operation `getTeam()` */
-  static readonly GetTeamPath = '/api/projects/{projectId}/teams/{teamId}';
+  static readonly GetTeamPath = '/api/teams/{projectId}/{teamId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -151,6 +208,31 @@ export class TeamService extends BaseService {
   getTeam(params: GetTeam$Params, context?: HttpContext): Observable<TeamDto> {
     return this.getTeam$Response(params, context).pipe(
       map((r: StrictHttpResponse<TeamDto>): TeamDto => r.body)
+    );
+  }
+
+  /** Path part for operation `deleteTeam()` */
+  static readonly DeleteTeamPath = '/api/teams/{id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `deleteTeam()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  deleteTeam$Response(params: DeleteTeam$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return deleteTeam(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `deleteTeam$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  deleteTeam(params: DeleteTeam$Params, context?: HttpContext): Observable<void> {
+    return this.deleteTeam$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

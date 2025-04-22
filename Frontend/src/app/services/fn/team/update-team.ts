@@ -34,4 +34,4 @@ export function updateTeam(http: HttpClient, rootUrl: string, params: UpdateTeam
   );
 }
 
-updateTeam.PATH = '/api/projects/{projectId}/teams/{id}';
+updateTeam.PATH = '/api/teams/{projectId}/{id}';
