@@ -34,11 +34,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -79,11 +79,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -114,11 +114,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -141,11 +141,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -197,11 +197,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -234,11 +234,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -279,11 +279,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -314,11 +314,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -341,11 +341,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -386,11 +386,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -421,11 +421,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -457,11 +457,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -511,11 +511,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -555,11 +555,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -591,11 +591,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -635,11 +635,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -662,11 +662,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -710,11 +710,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -747,11 +747,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -795,11 +795,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -831,11 +831,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK"
@@ -860,11 +860,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -897,11 +897,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -934,11 +934,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -982,11 +982,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "201": {
             "description": "Created",
@@ -1018,11 +1018,11 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -1054,11 +1054,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -1091,11 +1091,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -1130,11 +1130,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -1170,11 +1170,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -1210,11 +1210,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -1259,11 +1259,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -1278,6 +1278,46 @@
         }
       }
     },
+    "/api/projects/{projectId}/tasks/user/{userId}": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "operationId": "getUserTasks",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/projects/task-counts": {
       "get": {
         "tags": [
@@ -1285,11 +1325,11 @@
         ],
         "operationId": "getTaskCounts",
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "200": {
             "description": "OK",
@@ -1326,11 +1366,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -1353,11 +1393,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }

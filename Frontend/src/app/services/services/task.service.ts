@@ -21,6 +21,8 @@ import { getProjectTaskByBothId } from '../fn/task/get-project-task-by-both-id';
 import { GetProjectTaskByBothId$Params } from '../fn/task/get-project-task-by-both-id';
 import { getProjectTasks } from '../fn/task/get-project-tasks';
 import { GetProjectTasks$Params } from '../fn/task/get-project-tasks';
+import { getUserTasks } from '../fn/task/get-user-tasks';
+import { GetUserTasks$Params } from '../fn/task/get-user-tasks';
 import { TaskDto } from '../models/task-dto';
 import { updateTask } from '../fn/task/update-task';
 import { UpdateTask$Params } from '../fn/task/update-task';
@@ -153,6 +155,31 @@ export class TaskService extends BaseService {
   createTask(params: CreateTask$Params, context?: HttpContext): Observable<TaskDto> {
     return this.createTask$Response(params, context).pipe(
       map((r: StrictHttpResponse<TaskDto>): TaskDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getUserTasks()` */
+  static readonly GetUserTasksPath = '/api/projects/{projectId}/tasks/user/{userId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getUserTasks()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserTasks$Response(params: GetUserTasks$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<TaskDto>>> {
+    return getUserTasks(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getUserTasks$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserTasks(params: GetUserTasks$Params, context?: HttpContext): Observable<Array<TaskDto>> {
+    return this.getUserTasks$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<TaskDto>>): Array<TaskDto> => r.body)
     );
   }
 

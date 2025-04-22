@@ -1,0 +1,45 @@
+<div class="d-flex gap-3 p-2">
+  <h3 class="d-flex">Мои задачи</h3>
+</div>
+
+<hr>
+
+<div class=" gap-4 p-2">
+  <div *ngIf="hasError">
+    <div class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="p-2" *ngIf="!hasError && isEmpty">
+    <p>Нет ни одной задачи</p>
+  </div>
+
+  <div *ngIf="!hasError && !isEmpty">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Название</th>
+        <th>Дедлайн</th>
+        <th>Описание</th>
+        <th>Выполнена</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let task of tasks"
+        (mouseover)="hoveredTeam = task"
+        (mouseleave)="hoveredTeam = null"
+      >
+        <td (click)="toComments(task.id!)" class="text-primary curs">{{ task.name }}</td>
+        <td class="text-secondary">{{ task.endDate | date: 'dd/MM/yyyy' }}</td>
+        <td class="text-body">{{ task.description }}</td>
+        <td>
+          <div *ngIf="task.completed" class="text-success">Да</div>
+          <div *ngIf="!task.completed" class="text-danger">Нет</div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

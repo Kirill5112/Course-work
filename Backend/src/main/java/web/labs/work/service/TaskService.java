@@ -43,9 +43,19 @@ public class TaskService {
         return tasks.stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
     }
 
+    public List<TaskDto> getTasksByUserId(Long userId) {
+        List<Task> tasks = taskRepository.findByUserId(userId);
+        return tasks.stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
+    }
+
     public TaskDto getTaskByBothId(Long projectId, Long taskId) {
-        Task task = taskRepository.findByIdAndProjectId(taskId, projectId).
-                orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+        Task task;
+        if (projectId != 0)
+            task = taskRepository.findByIdAndProjectId(taskId, projectId).
+                    orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+        else
+            task = taskRepository.findById(taskId).
+                    orElseThrow(() -> new ResourceNotFoundException("Task not found"));
         return modelMapper.map(task, TaskDto.class);
     }
 

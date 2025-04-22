@@ -11,6 +11,8 @@ import {EditTeamComponent} from "./pages/edit-team/edit-team.component";
 import {UserProfileComponent} from "./pages/user-profile/user-profile.component";
 import {TeamUsersListComponent} from "./pages/team-users-list/team-users-list.component";
 import {StrangerProfileComponent} from "./pages/stranger-profile/stranger-profile.component";
+import {MyTasksComponent} from "./pages/my-tasks/my-tasks.component";
+import {CommentsComponent} from "./pages/comments/comments.component";
 
 const routes: Routes = [
   {
@@ -73,6 +75,14 @@ const routes: Routes = [
   {
     path: 'teams/:projectId/:id/users',
     component: TeamUsersListComponent
+  },
+  {
+    path: 'home',
+    component: MyTasksComponent
+  },
+  {
+    path: 'task/:id/comments',
+    component: CommentsComponent
   }
 ];
 

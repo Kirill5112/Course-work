@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {jwtDecode} from 'jwt-decode';
-import {Router} from "@angular/router";
 import {UserService} from "../../services/services/user.service";
 import {UserDto} from "../../services/models/user-dto";
 

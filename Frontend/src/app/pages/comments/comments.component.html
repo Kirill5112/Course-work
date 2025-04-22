@@ -1,0 +1,35 @@
+<div class="p-3">
+  <div class="task-description">
+    <h3>Описание задачи:</h3>
+    <p class="text-body">{{ task.description }}</p>
+  </div>
+
+  <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+    <div class="form-group">
+    <textarea
+      formControlName="text"
+      placeholder="Добавьте комментарий..."
+      rows="4"
+      class="form-control"
+    ></textarea>
+      <div *ngIf="commentForm.controls.text.errors && commentForm.touched">
+        <small class="text-danger" *ngIf="commentForm.get('text')?.hasError('required')">
+          Поле обязательно для заполнения
+        </small>
+        <small class="text-danger" *ngIf="commentForm.get('text')?.hasError('minlength')">
+          Минимум 3 символа
+        </small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!commentForm.valid">
+      Отправить
+    </button>
+  </form>
+
+  <div class="comments-list">
+    <div *ngFor="let comment of sortedComments" class="comment-item">
+      <p class="text-body">{{ comment.content }}</p>
+      <small class="text-secondary">{{ comment.created | date: 'dd.MM.yyyy HH:mm' }}</small>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,8 @@ export class TaskListComponent implements OnInit {
   private id!: number;
   tasks: TaskDto[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private taskService: TaskService) {
+  constructor(private route: ActivatedRoute, private router: Router,
+              private taskService: TaskService) {
   }
 
   ngOnInit() {

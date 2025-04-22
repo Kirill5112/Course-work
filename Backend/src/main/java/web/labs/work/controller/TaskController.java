@@ -31,6 +31,11 @@ public class TaskController {
         return taskService.getTasksByProjectId(projectId);
     }
 
+    @GetMapping("/user/{userId}")
+    public List<TaskDto> getUserTasks(@PathVariable Long userId) {
+        return taskService.getTasksByUserId(userId);
+    }
+
     @GetMapping("/{taskId}")
     public TaskDto getProjectTaskByBothID(@PathVariable Long projectId, @PathVariable Long taskId) {
         return taskService.getTaskByBothId(projectId, taskId);
