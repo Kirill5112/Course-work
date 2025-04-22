@@ -5,27 +5,33 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.OrRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import web.labs.work.service.CustomUserDetails;
 import web.labs.work.service.JwtService;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtService jwtService;
+    public static final String BEARER_PREFIX = "Bearer ";
+    public static final String HEADER_NAME = "Authorization";
+    private static final List<String> OPEN_ROUTES = List.of("/api/login", "api/register", "login", "register");
 
-    private final RequestMatcher excludedMatchers = new OrRequestMatcher(
+    private final JwtService jwtService;
+    private final CustomUserDetails customUserDetails;
+
+/*    private final RequestMatcher excludedMatchers = new OrRequestMatcher(
             new AntPathRequestMatcher("/api/login"),
             new AntPathRequestMatcher("/api/register"),
             new AntPathRequestMatcher("/swagger-ui.html"),
@@ -39,25 +45,38 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             new AntPathRequestMatcher("/swagger-ui/**"),
             new AntPathRequestMatcher("/webjars/**"),
             new AntPathRequestMatcher("/login"),
-            new AntPathRequestMatcher("/**")
-    );
+            new AntPathRequestMatcher("/register")
+    );*/
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
-        if (excludedMatchers.matches(request)) {
+
+        String path = request.getRequestURI();
+        if (OPEN_ROUTES.stream().anyMatch(path::startsWith) && request.getMethod().equals("GET")) {
             filterChain.doFilter(request, response);
             return;
         }
-        final String authHeader = request.getHeader("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+
+/*        if (excludedMatchers.matches(request)) {
+            filterChain.doFilter(request, response);
+            return;
+        }*/
+
+        var authHeader = request.getHeader(HEADER_NAME);
+        if (StringUtils.isEmpty(authHeader) || !authHeader.startsWith(BEARER_PREFIX)) {
+            filterChain.doFilter(request, response);
             return;
         }
+
+/*        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            return;
+        }*/
         String jwt = authHeader.substring(7);
         String username = jwtService.extractUsername(jwt);
-        if (jwtService.validateToken(jwt)) {
+/*        if (jwtService.validateToken(jwt)) {
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
@@ -66,6 +85,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
             }
             filterChain.doFilter(request, response);
+        }*/
+        if (!username.isEmpty() && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = customUserDetails.loadUserByUsername(username);
+
+            if (jwtService.validateToken(jwt)) {
+                SecurityContext context = SecurityContextHolder.createEmptyContext();
+
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities()
+                );
+
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                context.setAuthentication(authToken);
+                SecurityContextHolder.setContext(context);
+            }
+            else throw new ServletException("токен не валиден");
         }
+        filterChain.doFilter(request, response);
     }
 }

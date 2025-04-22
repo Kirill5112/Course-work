@@ -36,6 +36,7 @@ public class JwtService {
     }
 
     public boolean validateToken(String token) {
+
         try {
             Jwts.parserBuilder()
                     .setSigningKey(getKeyFromSecret())

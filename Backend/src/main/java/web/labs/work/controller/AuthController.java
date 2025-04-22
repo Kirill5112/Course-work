@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import web.labs.work.dto.UserDto;
+import web.labs.work.model.Role;
 import web.labs.work.model.User;
 import web.labs.work.repository.UserRepository;
 import web.labs.work.service.JwtService;
@@ -37,6 +38,7 @@ public class AuthController {
     public void register(@RequestBody UserDto userDto) {
         userDto.setId(null);
         userDto.setPassword(encoder.encode(userDto.getPassword()));
+        userDto.setRole(Role.ROLE_USER);
         User user = modelMapper.map(userDto, User.class);
         userRepository.save(user);
     }
