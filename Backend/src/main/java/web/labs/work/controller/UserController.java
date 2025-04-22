@@ -36,6 +36,16 @@ public class UserController {
         return userService.getUserByUsername(name);
     }
 
+    @GetMapping("/find")
+    public List<UserDto> findBySearch(@RequestParam String search) {
+        return userService.searchUsers(search);
+    }
+
+    @GetMapping("find/{projectId}")
+    public List<UserDto> findByProjectId(@PathVariable Long projectId) {
+        return userService.getUsersByProjectId(projectId);
+    }
+
     @GetMapping("/{userId}/teams")
     public List<TeamDto> getUserTeams(@PathVariable Long userId) {
         return userService.getUserTeams(userId);

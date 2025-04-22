@@ -23,7 +23,7 @@
     <div class="mb-3">
       <label for="dateE" class="form-label">Дата окончания</label>
       <input type="date" class="form-control" id="dateE" formControlName="endDate">
-      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('description')?.hasError('required')">
+      <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('endDate')?.hasError('required')">
         Поле дата окончания обязательно для заполнения
       </div>
       <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('endDate')?.hasError('invalidDate')">
@@ -32,6 +32,28 @@
       <div class="alert alert-danger" *ngIf="isTrySubmit && form.get('endDate')?.hasError('futureDate')">
         Дата должна быть в будущем
       </div>
+    </div>
+    <div class="mb-3">
+      <label for="user" class="form-label">Ответственный</label>
+      <select
+        class="form-control"
+        id="user"
+        formControlName="responsibleUser">
+        <option value="">Выберите пользователя</option>
+        <option
+          *ngFor="let user of users"
+          [value]="user.id">
+          {{ user.username }}
+        </option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="isTrySubmit && form.get('responsibleUser')?.hasError('required')">
+        Обязательно укажите ответственного
+      </div>
+    </div>
+    <div *ngIf="!users.length" class="mb-3 ps-3 text-bg-warning">
+      Некого назначить
     </div>
     <div class="mb-3 align-self-center">
       <button (click)="onClick()" class="btn btn-dark center" id="btn">{{ btnText }}</button>

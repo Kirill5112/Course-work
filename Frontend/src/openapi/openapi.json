@@ -1113,6 +1113,85 @@
         }
       }
     },
+    "/api/users/find": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "findBySearch",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/find/{projectId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "findByProjectId",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/teams/{teamId}/users": {
       "get": {
         "tags": [
@@ -1301,6 +1380,13 @@
           },
           "email": {
             "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ROLE_ADMIN",
+              "ROLE_USER"
+            ]
           }
         }
       },
@@ -1391,6 +1477,10 @@
             "type": "boolean"
           },
           "projectId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
             "type": "integer",
             "format": "int64"
           }

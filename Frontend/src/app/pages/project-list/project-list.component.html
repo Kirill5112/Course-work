@@ -1,7 +1,7 @@
 <div class="d-flex gap-4 p-2">
-  <h3 class="d-flex">Project list</h3>
+  <h3 class="d-flex">Список проектов</h3>
   <form [formGroup]="form" class="d-flex gap-2 align-items-center" role="search">
-    <input class="form-control" type="text" placeholder="Find a project" aria-label="Search"
+    <input class="form-control" type="text" placeholder="Найти проект" aria-label="Search"
            formControlName="inputField" (input)="updateSearch()">
     <button class=" btn btn-outline-success" (click)="updateSearch()"><i class="fas fa-search"></i></button>
   </form>

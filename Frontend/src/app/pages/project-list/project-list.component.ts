@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ProjectService} from "../../services/services/project.service";
 import {ProjectDto} from "../../services/models/project-dto";

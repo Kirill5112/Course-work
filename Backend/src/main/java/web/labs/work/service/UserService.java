@@ -33,6 +33,25 @@ public class UserService {
         return userDto;
     }
 
+    public List<UserDto> searchUsers(String search) {
+        if (search == null || search.isEmpty()) {
+            throw new IllegalStateException("Search string cannot be null or empty");
+        }
+        List<User> users = userRepository.searchUsers(search);
+        return users.stream().map(user -> {
+            user.setPassword(null);
+            return mapper.map(user, UserDto.class);
+        }).toList();
+    }
+
+    public List<UserDto> getUsersByProjectId(Long projectId) {
+        List<User> users = userRepository.findUsersByProjectId(projectId);
+        return users.stream().map(user -> {
+            user.setPassword(null);
+            return mapper.map(user, UserDto.class);
+        }).toList();
+    }
+
     public UserDto updateUser(Long id, UserDto dto) {
         User model = userRepository.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException("User not found"));

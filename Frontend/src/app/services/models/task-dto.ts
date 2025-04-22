@@ -9,4 +9,5 @@ export interface TaskDto {
   id?: number;
   name?: string;
   projectId?: number;
+  userId?: number;
 }

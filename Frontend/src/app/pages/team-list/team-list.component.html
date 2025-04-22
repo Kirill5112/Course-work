@@ -1,3 +1,9 @@
+
+<div class="d-flex p-2">
+  <button (click)="toProjectsList()" class="fa-solid fa-house bg-transparent border-0">&nbsp;</button>
+  <button (click)="newTeam()" class="btn btn-outline-dark">Новая команда</button>
+</div>
+
 <div class=" gap-4 p-2">
   <div *ngIf="hasError">
     <div class="alert alert-danger" role="alert">
@@ -11,12 +17,6 @@
 
   <div *ngIf="!hasError && !isEmpty">
     <ul class="list-group">
-      <li class="p-2">
-        <div class="d-flex">
-          <button (click)="toProjectsList()" class="fa-solid fa-house bg-transparent border-0">&nbsp;</button>
-          <button (click)="newTeam()" class="btn btn-outline-dark">Новая команда</button>
-        </div>
-      </li>
       <li class="list-group-item"
           *ngFor="let team of teams"
           (mouseover)="hoveredTeam = team"

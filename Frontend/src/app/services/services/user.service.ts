@@ -13,6 +13,10 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { deleteUser } from '../fn/user/delete-user';
 import { DeleteUser$Params } from '../fn/user/delete-user';
+import { findByProjectId } from '../fn/user/find-by-project-id';
+import { FindByProjectId$Params } from '../fn/user/find-by-project-id';
+import { findBySearch } from '../fn/user/find-by-search';
+import { FindBySearch$Params } from '../fn/user/find-by-search';
 import { getUser } from '../fn/user/get-user';
 import { GetUser$Params } from '../fn/user/get-user';
 import { getUserByName } from '../fn/user/get-user-by-name';
@@ -179,6 +183,56 @@ export class UserService extends BaseService {
   getUserTeams(params: GetUserTeams$Params, context?: HttpContext): Observable<Array<TeamDto>> {
     return this.getUserTeams$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<TeamDto>>): Array<TeamDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `findBySearch()` */
+  static readonly FindBySearchPath = '/api/users/find';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findBySearch()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findBySearch$Response(params: FindBySearch$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<UserDto>>> {
+    return findBySearch(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findBySearch$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findBySearch(params: FindBySearch$Params, context?: HttpContext): Observable<Array<UserDto>> {
+    return this.findBySearch$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<UserDto>>): Array<UserDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `findByProjectId()` */
+  static readonly FindByProjectIdPath = '/api/users/find/{projectId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findByProjectId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findByProjectId$Response(params: FindByProjectId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<UserDto>>> {
+    return findByProjectId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findByProjectId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findByProjectId(params: FindByProjectId$Params, context?: HttpContext): Observable<Array<UserDto>> {
+    return this.findByProjectId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<UserDto>>): Array<UserDto> => r.body)
     );
   }
 

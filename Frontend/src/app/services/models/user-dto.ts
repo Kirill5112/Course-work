@@ -6,5 +6,6 @@ export interface UserDto {
   email?: string;
   id?: number;
   password?: string;
+  role?: 'ROLE_ADMIN' | 'ROLE_USER';
   username?: string;
 }

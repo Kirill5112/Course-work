@@ -8,8 +8,10 @@ import web.labs.work.dto.TaskDto;
 import web.labs.work.exeption.ResourceNotFoundException;
 import web.labs.work.model.Project;
 import web.labs.work.model.Task;
+import web.labs.work.model.User;
 import web.labs.work.repository.ProjectRepository;
 import web.labs.work.repository.TaskRepository;
+import web.labs.work.repository.UserRepository;
 
 import java.util.List;
 
@@ -20,12 +22,15 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final ProjectRepository projectRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     public TaskDto createTask(Long projectId, TaskDto taskDto) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
+        if (taskDto.getUserId() == null)
+            throw new IllegalArgumentException("no assigny person");
         Task task = modelMapper.map(taskDto, Task.class);
         task.setProject(project);
         task = taskRepository.save(task);
@@ -47,6 +52,11 @@ public class TaskService {
     public TaskDto updateTask(Long projectId, Long taskId, TaskDto taskDto) {
         Task task = taskRepository.findByIdAndProjectId(taskId, projectId).
                 orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+        if (taskDto.getUserId() != null) {
+            User user = userRepository.findById(taskDto.getUserId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Assigny User not found"));
+            task.setUser(user);
+        }
         task.setName(taskDto.getName());
         task.setDescription(taskDto.getDescription());
         task.setEndDate(taskDto.getEndDate());

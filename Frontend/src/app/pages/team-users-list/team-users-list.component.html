@@ -1,20 +1,40 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-12">
-      <h2 class="mb-4">Список пользователей</h2>
+      <div class="d-flex mb-4">
+        <h2 class="me-4">Список пользователей</h2>
+        <button (click)="isHide = !isHide" type="button" class="btn btn-dark">
+          <em class="fa-solid fa-plus">&nbsp;Добавить</em>
+        </button>
+      </div>
       <ul class="list-group">
         <li
-          (click)="toStranger(user.id || 0)"
           *ngFor="let user of users"
-          class="list-group-item d-flex justify-content-between align-items-center"
-        >
-          {{ user.username }}
-          <span class="badge bg-primary rounded-pill">{{ user.id }}</span>
+          class="list-group-item d-flex justify-content-between align-items-center">
+          <div (click)="toStranger(user.id!)" class="curs">{{ user.username }}</div>
+          <em (click)="deleteUserFromTeam(user.id!)" class="fa-solid fa-minus curs"></em>
         </li>
         <li *ngIf="isEmpty" class="list-group">
-            Тут никого нет
+          Тут никого нет
         </li>
       </ul>
+      <div *ngIf="!isHide">
+        <form [formGroup]="form" class="d-flex gap-2 align-items-center mt-4" role="search">
+          <input class="form-control" type="text" placeholder="Найти" aria-label="Search"
+                 formControlName="inputField" (input)="updateSearch()">
+          <button class=" btn btn-outline-success" (click)="findUsers()"><i class="fas fa-search"></i></button>
+        </form>
+        <ul class="list-group">
+          <li
+            *ngFor="let foundUser of searchUsers"
+            class="list-group-item d-flex justify-content-between align-items-center">
+            <div (click)="toStranger(foundUser.id!)" class="curs">{{ foundUser.username }}</div>
+            <button (click)="addUserToTeam(foundUser.id!)" type="button" class="btn btn-dark">
+              <em class="fa-solid fa-plus">&nbsp;Добавить</em>
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
