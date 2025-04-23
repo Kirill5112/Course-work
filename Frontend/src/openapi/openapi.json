@@ -1470,6 +1470,10 @@
           "updated": {
             "type": "string",
             "format": "date-time"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },

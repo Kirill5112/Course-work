@@ -8,4 +8,5 @@ export interface CommentDto {
   id?: number;
   taskId?: number;
   updated?: string;
+  userId?: number;
 }

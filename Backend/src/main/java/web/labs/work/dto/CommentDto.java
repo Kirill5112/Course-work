@@ -15,4 +15,5 @@ public class CommentDto{
         String content;
         Timestamp created;
         Timestamp updated;
+        Long userId;
 }

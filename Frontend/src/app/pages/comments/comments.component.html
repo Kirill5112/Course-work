@@ -28,8 +28,9 @@
 
   <div class="comments-list">
     <div *ngFor="let comment of sortedComments" class="comment-item">
-      <p class="text-body">{{ comment.content }}</p>
-      <small class="text-secondary">{{ comment.created | date: 'dd.MM.yyyy HH:mm' }}</small>
+      <h6 (click)="toStranger(comment.comment.userId!)" class="card-header text-primary">{{comment.username}}</h6>
+      <p class="text-body">{{ comment.comment.content }}</p>
+      <small class="text-secondary">{{ comment.comment.created | date: 'dd.MM.yyyy HH:mm' }}</small>
     </div>
   </div>
 </div>
