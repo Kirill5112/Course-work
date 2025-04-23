@@ -38,6 +38,10 @@ export class MyTasksComponent implements OnInit {
         next: user => {
           this.user = user;
           this.findAllTasks()
+          if (this.user.role === "ROLE_ADMIN" && localStorage.getItem('init') === 'first') {
+            this.router.navigate(['projects']);
+            localStorage.setItem('init', 'notFirst');
+          }
         }
       })
     } else
@@ -59,8 +63,12 @@ export class MyTasksComponent implements OnInit {
     })
   }
 
-  toComments(id: number){
+  toComments(id: number) {
     this.router.navigate(['task', String(id), 'comments'])
+  }
+
+  protected goToProfile(){
+    this.router.navigate(['profile']);
   }
 
 }

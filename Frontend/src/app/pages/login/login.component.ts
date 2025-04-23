@@ -34,7 +34,8 @@ export class LoginComponent {
       next: (response: any) =>{
         const token = response.token;
         localStorage.setItem('token', token);
-        this.router.navigate(['projects'])
+        localStorage.setItem('init', 'first');
+        this.router.navigate(['home'])
       }
     });
   }

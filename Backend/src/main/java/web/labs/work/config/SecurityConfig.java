@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -56,7 +57,15 @@ public class SecurityConfig implements WebMvcConfigurer {
                                 "/webjars/**",
                                 "/swagger-ui.html").permitAll()
                         .requestMatchers(HttpMethod.GET,"/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/tasks/*/comments").hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.POST,"/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
+                )
+                .logout((logout) -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .permitAll()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 

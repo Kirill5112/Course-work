@@ -10,6 +10,23 @@
           </p>
         </div>
       </div>
+      <div class="d-flex m-auto">
+        <div class="m-auto">
+          <button (click)="toHome()" type="button" class="btn btn-dark mt-4">
+            <em class="fa-solid fa-tasks">&emsp;Мои задачи</em>
+          </button>
+        </div>
+        <div class="m-auto">
+          <button (click)="toProjects()" type="button" class="btn btn-dark mt-4">
+            <em class="fa-solid fa-eye">&emsp;Проекты</em>
+          </button>
+        </div>
+        <div class="m-auto">
+          <button (click)="logout()" type="button" class="btn btn-danger mt-4">
+            <em class="fa-solid fa-sign-out">&emsp;Выйти</em>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

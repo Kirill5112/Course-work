@@ -3,6 +3,7 @@
     <h5 class="card-title fs-6 text-nowrap  fw-bold mb-1">{{ task.name }}&emsp;
       <button (click)="onDelete()" class="fa-solid fa-trash bg-transparent border-0"></button>
       <button (click)="editTask(task.projectId || 0, task.id ||0)" class="fa-solid fa-pen bg-transparent border-0"></button>&emsp;
+      <button (click)="toComments()" class="fa-solid fa-message bg-transparent border-0"></button>
     </h5>
     <div *ngIf="task.completed else notCompleted">
       <p class="card-subtitle fs-6 text-success mb-1">Завершена</p>

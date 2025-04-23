@@ -31,4 +31,9 @@ export class TaskCardComponent {
   editTask(projectId: number, id: number) {
     this.router.navigate(['tasks', String(projectId), String(id)]);
   }
+
+  protected toComments(){
+    this.router.navigate(['task',String(this._task.id),'comments']);
+  }
+
 }
